@@ -7,6 +7,12 @@ class Noun(models.Model):
     pluralization_model = models.CharField(max_length=20) # TODO change to Integer choice
     gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
 
+class PersonalPronoun(models.Model):
+    pronoun_de = models.CharField(max_length=20)
+    pronoun_en = models.CharField(max_length=20)
+    case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
+    gender = models.CharField(max_length=1) # TODO change to Integer choice: M, F, N
+
 class Article(models.Model):
     article_de = models.CharField(max_length=3) # the article in german
     article_en = models.CharField(max_length=10) # the article in german english
