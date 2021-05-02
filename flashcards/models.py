@@ -16,11 +16,17 @@ class PersonalPronoun(models.Model):
     order = models.CharField(max_length=10, default="temp") # TODO change to Integer choice (ich, du, er_sie_es, wir, ihr, Sie)
 
 class Article(models.Model):
-    article_de = models.CharField(max_length=3) # the article in german
+    article_de = models.CharField(max_length=10) # the article in german
     article_en = models.CharField(max_length=10) # the article in german english
-    definite = models.BooleanField() # definite or indefinite
     case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
     gender = models.CharField(max_length=1) # TODO change to Integer choice: M, F, N
+    definite = models.BooleanField() # definite or indefinite
+
+    def __str__(self):
+        return f"({self.gender}, {self.case}, {self.definite}): {self.article_de}"
+
+    class Meta:
+        unique_together = ("case", "gender", "definite")
 
 class Verb(models.Model):
     verb_de = models.CharField(max_length=20)
