@@ -67,7 +67,7 @@ class RevLog(models.Model):
     rating = models.IntegerField() # the review difficulty logged (1, 2, 3, 4) TODO change to Integer choice
 
 
-class PersonalPronoun_Verb_Article_Noun(RevLog):
+class PersonalPronoun_Verb_Article_Noun_RevLog(RevLog):
     personal_pronoun = models.ForeignKey('PersonalPronoun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
     verb = models.ForeignKey('Verb', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
     article = models.ForeignKey('Article', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
