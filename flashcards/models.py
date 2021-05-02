@@ -1,5 +1,7 @@
 from django.db import models
 
+
+# POS models
 class Noun(models.Model):
     noun_de = models.CharField(max_length=20)
     noun_en = models.CharField(max_length=20)
@@ -56,3 +58,17 @@ class Verb(models.Model):
 
     class Meta:
         unique_together = ("infinitive_de", "mood", "tense", "subject") # every verb conjugation has an infinitive, a grammatical mood, a temporal-tense, and a subject that's conjugating it.
+
+
+# RevLog models
+class RevLog(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True) # the datetime that the review gets added
+    duration = models.IntegerField() # the time spent on the flashcard
+    rating = models.IntegerField() # the review difficulty logged (1, 2, 3, 4) TODO change to Integer choice
+
+
+class PersonalPronoun_Verb_Article_Noun(RevLog):
+    personal_pronoun = models.ForeignKey('PersonalPronoun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+    verb = models.ForeignKey('Verb', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+    article = models.ForeignKey('Article', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+    noun = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
