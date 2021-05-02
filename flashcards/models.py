@@ -12,7 +12,7 @@ class Noun(models.Model):
 
     def __str__(self):
         gender_dic = {"M": "der", "F": "die", "N": "das", "P": "die"}
-        return f"{gender_dic[self.gender]} {self.noun_de} (die {self.noun_de_pl}) "
+        return f"{gender_dic[self.gender]} {self.noun_de} (die {self.noun_de_pl})"
 
 
 class PersonalPronoun(models.Model):
@@ -66,6 +66,9 @@ class RevLog(models.Model):
     duration = models.IntegerField() # the time spent on the flashcard
     rating = models.IntegerField() # the review difficulty logged (1, 2, 3, 4) TODO change to Integer choice
 
+    def __str__(self):
+        return f"""\n- study_timestamp: {self.timestamp}\n- study_duratiion: {self.duration}\n- study_rating: {self.rating}"""
+
 
 class PersonalPronoun_Verb_Article_Noun_RevLog(RevLog):
     personal_pronoun = models.ForeignKey('PersonalPronoun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
@@ -76,5 +79,6 @@ class PersonalPronoun_Verb_Article_Noun_RevLog(RevLog):
 
 class NounGenderGuess_RevLog(RevLog):
     noun = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-
     
+    def __str__(self):
+        return f"""{self.noun}:{super().__str__()}"""
