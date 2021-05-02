@@ -8,6 +8,7 @@ authors = ["Ben Feifke <benfeifke@gmail.com>"]
 python = "^3.7"
 Django = "^3.2"
 psycopg2 = "^2.8.6"
+ipython = "^7.23.0"
 
 [tool.poetry.dev-dependencies]
 
