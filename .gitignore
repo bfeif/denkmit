@@ -1,6 +1,5 @@
 # data-loading python scripts
-load_articles.py
-load_verbs.py
+load_*.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
