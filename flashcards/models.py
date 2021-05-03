@@ -20,7 +20,6 @@ class PersonalPronoun(models.Model):
     pronoun_en = models.CharField(max_length=20)
     case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
     nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, Sie)
-    order = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er_sie_es, wir, ihr, Sie)
 
     def __str__(self):
         return f"({self.nom_pronoun_de}, {self.case}): {self.pronoun_de}"
