@@ -6,7 +6,7 @@ class Noun(models.Model):
     noun_de = models.CharField(max_length=20)
     noun_en = models.CharField(max_length=20)
     noun_de_pl = models.CharField(max_length=20)
-    noun_en_pl = models.CharField(max_length=20, default="temp")
+    noun_en_pl = models.CharField(max_length=20, default="temporary")
     pluralization_model = models.CharField(max_length=20) # TODO change to Integer choice
     gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
 
@@ -19,8 +19,8 @@ class PersonalPronoun(models.Model):
     pronoun_de = models.CharField(max_length=20)
     pronoun_en = models.CharField(max_length=20)
     case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
-    nom_pronoun_de = models.CharField(max_length=10, default="temp") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, Sie)
-    order = models.CharField(max_length=10, default="temp") # TODO change to Integer choice (ich, du, er_sie_es, wir, ihr, Sie)
+    nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, Sie)
+    order = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er_sie_es, wir, ihr, Sie)
 
     def __str__(self):
         return f"({self.nom_pronoun_de}, {self.case}): {self.pronoun_de}"
@@ -46,7 +46,7 @@ class Article(models.Model):
 class Verb(models.Model):
     verb_de = models.CharField(max_length=20)
     verb_en = models.CharField(max_length=20)
-    infinitive_de = models.CharField(max_length=20, default="temp")
+    infinitive_de = models.CharField(max_length=20, default="temporary")
     mood = models.CharField(max_length=10) # TODO change to Integer choice
     tense = models.CharField(max_length=10) # TODO change to Integer choice
     subject = models.CharField(max_length=10) # TODO change to Integer choice (ich, du, er_sie_es, wir, ihr, Sie)
