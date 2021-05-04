@@ -5,10 +5,11 @@ description = ""
 authors = ["Ben Feifke <benfeifke@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.7.1,<4.0"
 Django = "^3.2"
 psycopg2 = "^2.8.6"
 ipython = "^7.23.0"
+pandas = "^1.2.4"
 
 [tool.poetry.dev-dependencies]
 
