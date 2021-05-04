@@ -141,4 +141,3 @@ class NounGenderGuess_RevLog(RevLog):
             print(f"running flashcard {index}!")
             cls.run_flashcard(noun)
             print("------------\n")
-    
