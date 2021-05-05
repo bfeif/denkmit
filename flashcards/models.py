@@ -138,6 +138,34 @@ class NounGenderGuess_RevLog(RevLog):
 
         # do a flashcard for each noun in the deck
         for index, noun in enumerate(nouns):
-            print(f"running flashcard {index}!")
+            print(f"running flashcard {index}")
+            cls.run_flashcard(noun)
+            print("------------\n")
+
+class NounPluralizationGuess_RevLog(RevLog):
+    noun = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+    
+    def __str__(self):
+        return f"""{self.noun}:{super().__str__()}"""
+
+    def flashcard_question_str(self):
+        article = Article.objects.get(gender=self.noun.gender, case="Nom", definite=True).article_de
+        return f"{article} {self.noun.noun_de} (die ______)"
+
+    def flashcard_answer_str(self):
+        article = Article.objects.get(gender=self.noun.gender, case="Nom", definite=True).article_de
+        return f"{article} {self.noun.noun_de} (die {self.noun.noun_de_pl})"
+
+    # function to generate a flashcard deck for the day of studying
+    @classmethod
+    def run_flashcard_deck(cls):
+
+        # get the deck of nouns for the study session
+        nouns = Noun.objects.all() # TODO: change to be only the relevant flashcards, i.e. the ones that need to be practiced for the day.
+        deck_length=nouns.count()
+
+        # do a flashcard for each noun in the deck
+        for index, noun in enumerate(nouns):
+            print(f"running flashcard {index}")
             cls.run_flashcard(noun)
             print("------------\n")
