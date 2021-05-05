@@ -169,3 +169,9 @@ class NounPluralizationGuess_RevLog(RevLog):
             print(f"running flashcard {index}")
             cls.run_flashcard(noun)
             print("------------\n")
+
+class ArticleDeclension_RevLog(RevLog):
+    article = models.ForeignKey('Article', on_delete=models.SETE_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+    def __str__(self):
+        return f"""{self.article}:{super().__str__()}"""
