@@ -108,13 +108,6 @@ class RevLog(models.Model):
         rev_log.save()
 
 
-class PersonalPronoun_Verb_Article_Noun_RevLog(RevLog):
-    personal_pronoun = models.ForeignKey('PersonalPronoun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-    verb = models.ForeignKey('Verb', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-    article = models.ForeignKey('Article', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-    noun = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-
-
 class NounGenderGuess_RevLog(RevLog):
     noun = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
     
