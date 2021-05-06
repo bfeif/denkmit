@@ -68,6 +68,9 @@ class RevLog(models.Model):
     duration = models.IntegerField() # the time spent on the flashcard
     rating = models.IntegerField() # the review difficulty logged (1, 2, 3, 4) TODO change to Integer choice
 
+    class Meta:
+        abstract=True
+
     def __str__(self):
         return f"""\n- study_timestamp: {self.timestamp}\n- study_duration: {self.duration}\n- study_rating: {self.rating}"""
 
@@ -110,7 +113,7 @@ class RevLog(models.Model):
 
 class NounGenderGuess_RevLog(RevLog):
     noun = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-    
+
     def __str__(self):
         return f"""{self.noun}:{super().__str__()}"""
 
