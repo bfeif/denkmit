@@ -1,6 +1,3 @@
-# data-loading python scripts
-load_*.py
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 flashcards/__pycache__/
