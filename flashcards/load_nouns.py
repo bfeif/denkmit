@@ -1,17 +1,17 @@
-# from flashcards.models import Verb
+from flashcards.models import Noun
 
-# noun_de = ["spiele", "laufe", "gebe"]
-# verb_en = ["play", "walk", "give"]
-# noun_de = []
+word_de = ["Haus", "Strand", "Lösung"]
+word_en = ["house", "beach", "solution"]
+word_de_pl = ["Häuser", "Strände", "Lösungen"]
+word_en_pl = ["houses", "beaches", "solutions"]
+gender = ["N", "M", "F"]
 
-# for i in range(len(verb_de)):
-# 	v = Verb(
-# 		verb_de = verb_de[i],
-# 		verb_en = verb_en[i],
-# 		infinitive_de = infinitive_de[i],
-# 		mood = mood[i],
-# 		tense = tense[i],
-# 		subject = subject[i],
-# 		valency = valency[i]
-# 	)
-# 	v.save()
+for i in range(len(word_de)):
+	n = Noun(
+		word_de = word_de[i],
+		word_en = word_en[i],
+		word_de_pl = word_de_pl[i],
+        word_en_pl = word_en_pl[i],
+		gender = gender[i]
+	)
+	n.save()
