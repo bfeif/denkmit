@@ -25,8 +25,8 @@ class Verb(POS):
 
 
 class Noun(POS):
-    noun_de_pl = models.CharField(max_length=20)
-    noun_en_pl = models.CharField(max_length=20, default="temporary")
+    word_de_pl = models.CharField(max_length=20)
+    word_en_pl = models.CharField(max_length=20, default="temporary")
     pluralization_model = models.CharField(max_length=20) # TODO change to Integer choice
     gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
 
