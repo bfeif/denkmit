@@ -23,8 +23,8 @@ en_df = pd.DataFrame.from_dict(
 for i in range(len(de_df)):
     for case in ["Nom", "Dat", "Akk"]:
         p = PersonalPronoun(
-            pronoun_de=de_df.loc[i][case],
-            pronoun_en=en_df.loc[i][case],
+            word_de=de_df.loc[i][case],
+            word_en=en_df.loc[i][case],
             case=case,
             nom_pronoun_de=de_df.loc[i]["Nom"],
             person=de_df.loc[i]["person"],

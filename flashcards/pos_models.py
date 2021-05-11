@@ -18,7 +18,7 @@ class Verb(POS):
     # TODO: phrasal verbs and the requisite fields
 
     def __str__(self):
-        return f"({self.infinitive_de}, {self.mood}, {self.tense}, {self.subject}): {self.verb_de}"
+        return f"({self.infinitive_de}, {self.mood}, {self.tense}, {self.subject}): {self.word_de}"
 
     class Meta:
         unique_together = ("infinitive_de", "mood", "tense", "subject") # every verb conjugation has an infinitive, a grammatical mood, a temporal-tense, and a subject that's conjugating it.
@@ -32,7 +32,7 @@ class Noun(POS):
 
     def __str__(self):
         gender_dic = {"M": "der", "F": "die", "N": "das", "P": "die"}
-        return f"{gender_dic[self.gender]} {self.noun_de} (die {self.noun_de_pl})"
+        return f"{gender_dic[self.gender]} {self.word_de} (die {self.word_de_pl})"
 
 
 class Decliner(POS):
@@ -43,12 +43,12 @@ class Decliner(POS):
 
 
 class PersonalPronoun(Decliner):
-    nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, Sie)
+    nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, sie, Sie)
     person = models.IntegerField() # 1st person, 2nd person, 3rd person
     is_plural = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"({self.nom_pronoun_de}, {self.case}): {self.pronoun_de}"
+        return f"({self.nom_pronoun_de}, {self.case}): {self.word_de}"
     
     class Meta:
         unique_together = ("nom_pronoun_de", "case", "person", "is_plural")
@@ -59,7 +59,7 @@ class Article(Decliner):
     definite = models.BooleanField() # definite or indefinite
 
     def __str__(self):
-        return f"({self.gender}, {self.case}, {self.definite}): {self.article_de}"
+        return f"({self.gender}, {self.case}, {self.definite}): {self.word_de}"
 
     class Meta:
         unique_together = ("case", "gender", "definite")
