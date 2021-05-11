@@ -1,52 +1,15 @@
 from django.db import models
 import time
 
-# POS models
-class Noun(models.Model):
-    noun_de = models.CharField(max_length=20)
-    noun_en = models.CharField(max_length=20)
-    noun_de_pl = models.CharField(max_length=20)
-    noun_en_pl = models.CharField(max_length=20, default="temporary")
-    pluralization_model = models.CharField(max_length=20) # TODO change to Integer choice
-    gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
-
-    def __str__(self):
-        gender_dic = {"M": "der", "F": "die", "N": "das", "P": "die"}
-        return f"{gender_dic[self.gender]} {self.noun_de} (die {self.noun_de_pl})"
-
-
-class PersonalPronoun(models.Model):
-    pronoun_de = models.CharField(max_length=20)
-    pronoun_en = models.CharField(max_length=20)
-    case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
-    nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, Sie)
-    person = models.IntegerField() # 1st person, 2nd person, 3rd person
-    is_plural = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"({self.nom_pronoun_de}, {self.case}): {self.pronoun_de}"
+class POS(models.Model):
+    word_de = models.CharField(max_length=20)
+    word_en = models.CharField(max_length=20)
     
     class Meta:
-        unique_together = ("nom_pronoun_de", "case", "person", "is_plural")
+        abstract=True
 
 
-class Article(models.Model):
-    article_de = models.CharField(max_length=10) # the article in german
-    article_en = models.CharField(max_length=10) # the article in german english
-    case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
-    gender = models.CharField(max_length=1) # TODO change to Integer choice: M, F, N
-    definite = models.BooleanField() # definite or indefinite
-
-    def __str__(self):
-        return f"({self.gender}, {self.case}, {self.definite}): {self.article_de}"
-
-    class Meta:
-        unique_together = ("case", "gender", "definite")
-
-
-class Verb(models.Model):
-    verb_de = models.CharField(max_length=20)
-    verb_en = models.CharField(max_length=20)
+class Verb(POS):
     infinitive_de = models.CharField(max_length=20, default="temporary")
     mood = models.CharField(max_length=10) # TODO change to Integer choice
     tense = models.CharField(max_length=10) # TODO change to Integer choice
@@ -59,3 +22,39 @@ class Verb(models.Model):
 
     class Meta:
         unique_together = ("infinitive_de", "mood", "tense", "subject") # every verb conjugation has an infinitive, a grammatical mood, a temporal-tense, and a subject that's conjugating it.
+
+
+class Noun(POS):
+    noun_de_pl = models.CharField(max_length=20)
+    noun_en_pl = models.CharField(max_length=20, default="temporary")
+    pluralization_model = models.CharField(max_length=20) # TODO change to Integer choice
+    gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
+
+    def __str__(self):
+        gender_dic = {"M": "der", "F": "die", "N": "das", "P": "die"}
+        return f"{gender_dic[self.gender]} {self.noun_de} (die {self.noun_de_pl})"
+
+
+class PersonalPronoun(POS):
+    case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
+    nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, Sie)
+    person = models.IntegerField() # 1st person, 2nd person, 3rd person
+    is_plural = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"({self.nom_pronoun_de}, {self.case}): {self.pronoun_de}"
+    
+    class Meta:
+        unique_together = ("nom_pronoun_de", "case", "person", "is_plural")
+
+
+class Article(POS):
+    case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
+    gender = models.CharField(max_length=1) # TODO change to Integer choice: M, F, N
+    definite = models.BooleanField() # definite or indefinite
+
+    def __str__(self):
+        return f"({self.gender}, {self.case}, {self.definite}): {self.article_de}"
+
+    class Meta:
+        unique_together = ("case", "gender", "definite")
