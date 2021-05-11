@@ -1,4 +1,5 @@
 from django.db import models
+from .pos_models import *
 import time
 
 # RevLog models
