@@ -35,8 +35,14 @@ class Noun(POS):
         return f"{gender_dic[self.gender]} {self.noun_de} (die {self.noun_de_pl})"
 
 
-class PersonalPronoun(POS):
+class Decliner(POS):
     case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
+
+    class Meta:
+        abstract=True
+
+
+class PersonalPronoun(Decliner):
     nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, Sie)
     person = models.IntegerField() # 1st person, 2nd person, 3rd person
     is_plural = models.BooleanField(default=False)
@@ -48,8 +54,7 @@ class PersonalPronoun(POS):
         unique_together = ("nom_pronoun_de", "case", "person", "is_plural")
 
 
-class Article(POS):
-    case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
+class Article(Decliner):
     gender = models.CharField(max_length=1) # TODO change to Integer choice: M, F, N
     definite = models.BooleanField() # definite or indefinite
 
