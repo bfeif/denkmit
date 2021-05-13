@@ -98,8 +98,3 @@ class NounPluralizationGuess_RevLog(RevLog):
     def flashcard_answer_str(self):
         article = Article.objects.get(gender=self.pos.gender, case="Nom", definite=True).word_de
         return f"{article} {self.pos.word_de} (die {self.pos.word_de_pl})"
-    
-    # function to generate a flashcard deck for the day of studying
-    @classmethod
-    def run_flashcard_deck(cls):
-        super(NounPluralizationGuess_RevLog, cls).run_flashcard_deck()
