@@ -12,7 +12,7 @@ class RevLog(models.Model):
         abstract=True
 
     def __str__(self):
-        return f"""\n- study_timestamp: {self.timestamp}\n- study_duration: {self.duration}\n- study_rating: {self.rating}"""
+        return f"""{self.pos}:\n - study_timestamp: {self.timestamp}\n - study_duration: {self.duration}\n - study_rating: {self.rating}"""
 
     # function to generate a flashcard deck for the day of studying
     @classmethod
@@ -74,9 +74,6 @@ class RevLog(models.Model):
 class NounGenderGuess_RevLog(RevLog):
     pos = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
 
-    def __str__(self):
-        return f"""{self.pos}:{super().__str__()}"""
-
     def flashcard_question_str(self):
         return f"___ {self.pos.word_de}"
 
@@ -87,9 +84,6 @@ class NounGenderGuess_RevLog(RevLog):
 
 class NounPluralizationGuess_RevLog(RevLog):
     pos = models.ForeignKey('Noun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-    
-    def __str__(self):
-        return f"""{self.pos}:{super().__str__()}"""
 
     def flashcard_question_str(self):
         article = Article.objects.get(gender=self.pos.gender, case="Nom", definite=True).word_de
@@ -101,6 +95,3 @@ class NounPluralizationGuess_RevLog(RevLog):
 
 class PersonalPronoun_RevLog(RevLog):
     pos = models.ForeignKey('PersonalPronoun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
-
-    def __str__(self):
-        return f"""{self.pos}:{super().__str__()}"""
