@@ -29,7 +29,7 @@ class RevLog(models.Model):
         deck_length=pos_list.count()
 
         # do a flashcard for each noun in the deck
-        for index, pos in enumerate(pos_list):
+        for index, pos in enumerate(pos_list[0:2]):
             print(f"running flashcard {index + 1}")
             cls.run_flashcard(pos)
             print("------------\n")
@@ -95,3 +95,9 @@ class NounPluralizationGuess_RevLog(RevLog):
 
 class PersonalPronoun_RevLog(RevLog):
     pos = models.ForeignKey('PersonalPronoun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+    def flashcard_question_str(self):
+        return f"{self.pos.nom_pronoun_de}, {self.pos.case} (\"{self.pos.word_en}\"): ___"
+
+    def flashcard_answer_str(self):
+        return f"{self.pos.nom_pronoun_de}, {self.pos.case} (\"{self.pos.word_en}\"): {self.pos.word_de}"
