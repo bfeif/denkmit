@@ -98,3 +98,9 @@ class NounPluralizationGuess_RevLog(RevLog):
     def flashcard_answer_str(self):
         article = Article.objects.get(gender=self.pos.gender, case="Nom", definite=True).word_de
         return f"{article} {self.pos.word_de} (die {self.pos.word_de_pl})"
+
+class PersonalPronoun_RevLog(RevLog):
+    pos = models.ForeignKey('PersonalPronoun', on_delete=models.SET_NULL, null=True) # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+    def __str__(self):
+        return f"""{self.pos}:{super().__str__()}"""
