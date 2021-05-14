@@ -1,4 +1,5 @@
 from django.db import models
+from . import pos_models
 from . import card_defaults
 
 class CardScore(models.Model):
@@ -8,4 +9,15 @@ class CardScore(models.Model):
 
     class Meta:
         abstract=True
-        
+
+
+class NounGenderGuess_Score(CardScore):
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+
+
+class NounPluralizationGuess_Score(CardScore):
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+
+
+class PersonalPronoun_Score(CardScore):
+    pos = models.OneToOneField(pos_models.PersonalPronoun, on_delete=models.SET_NULL, null=True)
