@@ -38,31 +38,30 @@ class CardScore(models.Model):
             "  - 4 (Easy)\n" \
             "Difficulty: ")
 
+
     # function to generate and study a flashcard
     def run_flashcard(self):
-        
-        # generate the flashcard
-        ### PICK BACK UP HERE
-        rev_log = self.revlogs(duration=5, rating=2, card=card)
-        
+
         # show the question
-        print(rev_log.flashcard_question_str())
+        print(self.flashcard_question_str())
         flashcard_start_timestamp = time.time()
 
         # wait for the user to request showing the answer, then show it
         input("Hit ENTER to show the answer...")
-        print(rev_log.flashcard_question_str())
-        print(rev_log.flashcard_answer_str())
+        print(self.flashcard_question_str())
+        print(self.flashcard_answer_str())
 
         # get the user's rating
         print(self.rate_flashcard_string())
         rating = input()
         duration = time.time() - flashcard_start_timestamp
 
-        # save the rev_log
-        rev_log.duration = duration
-        rev_log.rating = rating
-        rev_log.save()
+        # generate and save the rev_log
+        self.revlogs.create(
+            duration=duration,
+            rating=rating,
+            card=self)
+
 
 class NounGenderGuess_Score(CardScore):
     pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
