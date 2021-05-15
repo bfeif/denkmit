@@ -1,6 +1,6 @@
 from django.db import models
 from .pos_models import *
-from . import cards
+from . import card_models
 
 # RevLog models
 class RevLog(models.Model):
@@ -17,7 +17,7 @@ class RevLog(models.Model):
 
 class NounGenderGuess_RevLog(RevLog):
     card = models.ForeignKey(
-        cards.NounGenderGuess_Card,
+        card_models.NounGenderGuess_Card,
         on_delete=models.SET_NULL,
         null=True,
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
@@ -25,7 +25,7 @@ class NounGenderGuess_RevLog(RevLog):
 
 class NounPluralizationGuess_RevLog(RevLog):
     card = models.ForeignKey(
-        cards.NounPluralizationGuess_Card,
+        card_models.NounPluralizationGuess_Card,
         on_delete=models.SET_NULL,
         null=True,
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
@@ -33,7 +33,7 @@ class NounPluralizationGuess_RevLog(RevLog):
 
 class PersonalPronoun_RevLog(RevLog):
     card = models.ForeignKey(
-        cards.PersonalPronoun_Card,
+        card_models.PersonalPronoun_Card,
         on_delete=models.SET_NULL,
         null=True,
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)

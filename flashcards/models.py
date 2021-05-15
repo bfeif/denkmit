@@ -1,3 +1,3 @@
 from .revlog_models import *
 from .pos_models import *
-from .cards import *
+from .card_models import *
