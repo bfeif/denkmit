@@ -1,7 +1,6 @@
 from django.db import models
 from .pos_models import *
 from . import cards
-import time
 
 # RevLog models
 class RevLog(models.Model):

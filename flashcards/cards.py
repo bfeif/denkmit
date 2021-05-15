@@ -1,13 +1,13 @@
 from django.db import models
 from . import pos_models, revlog_models
-from . import card_defaults
+from . import defaults
 import time, datetime
 
 class Card(models.Model):
     last_studied_utc = models.DateTimeField(auto_now_add=True)
     num_repetitions = models.IntegerField(default=0)
-    ease = models.FloatField(default=card_defaults.EASE_INIT)
-    interval = models.FloatField(default=card_defaults.INTERVAL_INIT)
+    ease = models.FloatField(default=defaults.EASE_INIT)
+    interval = models.FloatField(default=defaults.INTERVAL_INIT)
 
     class Meta:
         abstract=True
@@ -49,13 +49,13 @@ class Card(models.Model):
         # compute all the new settings
         last_studied_utc_new = datetime.datetime.now()
         num_repetitions_new = self.num_repetitions + 1
-        ease_new = card_defaults.EASE_MODIFIER_DIC[rating] * self.ease
+        ease_new = defaults.EASE_MODIFIER_DIC[rating] * self.ease
         if rating == 1:
-            interval_new = 3.75 * ease_new * card_defaults.INTERVAL_MODIFIER * self.interval
+            interval_new = 3.75 * ease_new * defaults.INTERVAL_MODIFIER * self.interval
         elif rating == 2:
-            interval_new = 2.5  * ease_new * card_defaults.INTERVAL_MODIFIER * self.interval
+            interval_new = 2.5  * ease_new * defaults.INTERVAL_MODIFIER * self.interval
         elif rating == 3:
-            interval_new = 1.25 * ease_new * card_defaults.INTERVAL_MODIFIER * self.interval
+            interval_new = 1.25 * ease_new * defaults.INTERVAL_MODIFIER * self.interval
         elif rating == 4:
             interval_new = .5 # run it again and reset the card
         else:
@@ -86,7 +86,7 @@ class Card(models.Model):
         print(self.rate_flashcard_string())
         rating = int(input())
         duration = time.time() - flashcard_start_timestamp
-        if rating not in card_defaults.POSSIBLE_RATINGS:
+        if rating not in defaults.POSSIBLE_RATINGS:
             print("Invalid rating entered, not updating anything")
             return rating
 
