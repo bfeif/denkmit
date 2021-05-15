@@ -17,10 +17,7 @@ class Card(models.Model):
     def run_flashcard_deck(cls):
 
         # get the deck of cards for the study session
-        card_list = (
-            cls
-            .objects
-            .all()) # TODO: change to be only the relevant flashcards, i.e. the ones that need to be practiced for the day.
+        card_list = cls.objects.all() # TODO: change to be only the relevant flashcards, i.e. the ones that need to be practiced for the day.
         deck_length=card_list.count()
 
         # do a flashcard for each noun in the deck
