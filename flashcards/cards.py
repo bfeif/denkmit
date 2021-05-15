@@ -1,16 +1,25 @@
 from django.db import models
 from . import pos_models, revlog_models
 from . import card_defaults
-import time
+import time, datetime
 
 class Card(models.Model):
     last_studied_utc = models.DateTimeField(auto_now_add=True)
+    num_repetitions = models.IntegerField(default=0)
     ease = models.FloatField(default=card_defaults.EASE_INIT)
     interval = models.FloatField(default=card_defaults.INTERVAL_INIT)
-    num_repetitions = models.IntegerField(default=0)
 
     class Meta:
         abstract=True
+
+    def __str__(self):
+        return (
+            f"{self.pos}:\n" \
+            f" - last studied at: {self.last_studied_utc} \n" \
+            f" - num repetitions: {self.num_repetitions} \n" \
+            f" - current ease: {self.ease} \n" \
+            f" - current interval: {self.interval} \n"
+        )
 
     # function to generate a flashcard deck for the day of studying
     @classmethod
@@ -29,11 +38,36 @@ class Card(models.Model):
     def rate_flashcard_string(self):
         return (
             "Rate difficulty (1-4)\n" \
-            "  - 1 (No idea; show it again this session)\n" \
-            "  - 2 (Difficult)\n" \
-            "  - 3 (Good)\n" \
-            "  - 4 (Easy)\n" \
+            "  - 1 (Easy)\n" \
+            "  - 2 (Good)\n" \
+            "  - 3 (Difficult)\n" \
+            "  - 4 (No idea; show it again this session)\n" \
             "Difficulty: ")
+
+    def update_card_srs_metrics(self, rating):
+
+        # compute all the new settings
+        last_studied_utc_new = datetime.datetime.now()
+        num_repetitions_new = self.num_repetitions + 1
+        ease_new = card_defaults.EASE_MODIFIER_DIC[rating] * self.ease
+        if rating == 1:
+            interval_new = 3.75 * ease_new * card_defaults.INTERVAL_MODIFIER * self.interval
+        elif rating == 2:
+            interval_new = 2.5  * ease_new * card_defaults.INTERVAL_MODIFIER * self.interval
+        elif rating == 3:
+            interval_new = 1.25 * ease_new * card_defaults.INTERVAL_MODIFIER * self.interval
+        elif rating == 4:
+            interval_new = .5 # run it again and reset the card
+        else:
+            print("Invalid rating entered, not updating anything")
+            return
+
+        # set all the new settings to the object
+        self.last_studied_utc = last_studied_utc_new
+        self.num_repetitions = num_repetitions_new
+        self.ease = ease_new
+        self.interval = interval_new
+        self.save()
 
 
     # function to generate and study a flashcard
@@ -48,16 +82,22 @@ class Card(models.Model):
         print(self.flashcard_question_str())
         print(self.flashcard_answer_str())
 
-        # get the user's rating
+        # get the user's rating; escape the card if the rating isn't legal
         print(self.rate_flashcard_string())
-        rating = input()
+        rating = int(input())
         duration = time.time() - flashcard_start_timestamp
+        if rating not in card_defaults.POSSIBLE_RATINGS:
+            print("Invalid rating entered, not updating anything")
+            return rating
 
         # generate and save the rev_log
         self.revlogs.create(
             duration=duration,
             rating=rating,
             card=self)
+
+        # update the card's memory metrics
+        self.update_card_srs_metrics(rating)
 
 
 class NounGenderGuess_Card(Card):
