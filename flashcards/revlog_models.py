@@ -1,5 +1,4 @@
 from django.db import models
-from .pos_models import *
 from . import card_models
 
 # RevLog models
