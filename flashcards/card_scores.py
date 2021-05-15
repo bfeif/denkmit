@@ -3,7 +3,7 @@ from . import pos_models, revlog_models
 from . import card_defaults
 import time
 
-class CardScore(models.Model):
+class Card(models.Model):
     last_studied_utc = models.DateTimeField(auto_now_add=True)
     ease = models.FloatField(default=card_defaults.EASE_INIT)
     interval = models.FloatField(default=card_defaults.INTERVAL_INIT)
@@ -63,7 +63,7 @@ class CardScore(models.Model):
             card=self)
 
 
-class NounGenderGuess_Score(CardScore):
+class NounGenderGuess_Card(Card):
     pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
 
     def flashcard_question_str(self):
@@ -74,7 +74,7 @@ class NounGenderGuess_Score(CardScore):
         return f"{article} {self.pos.word_de} (die {self.pos.word_de_pl})"
 
 
-class NounPluralizationGuess_Score(CardScore):
+class NounPluralizationGuess_Card(Card):
     pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
 
     def flashcard_question_str(self):
@@ -86,7 +86,7 @@ class NounPluralizationGuess_Score(CardScore):
         return f"{article} {self.pos.word_de} (die {self.pos.word_de_pl})"
 
 
-class PersonalPronoun_Score(CardScore):
+class PersonalPronoun_Card(Card):
     pos = models.OneToOneField(pos_models.PersonalPronoun, on_delete=models.SET_NULL, null=True)
 
     def flashcard_question_str(self):
