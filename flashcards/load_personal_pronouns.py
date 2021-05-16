@@ -1,5 +1,6 @@
 import pandas as pd
-from flashcards.models import PersonalPronoun
+from flashcards.models import PersonalPronoun,\
+    PersonalPronoun_Card
 
 
 de_df = pd.DataFrame.from_dict(
@@ -22,6 +23,8 @@ en_df = pd.DataFrame.from_dict(
 
 for i in range(len(de_df)):
     for case in ["Nom", "Dat", "Akk"]:
+        
+        # create and save POS
         p = PersonalPronoun(
             word_de=de_df.loc[i][case],
             word_en=en_df.loc[i][case],
@@ -31,3 +34,7 @@ for i in range(len(de_df)):
             is_plural=de_df.loc[i]["is_plural"]
         )
         p.save()
+
+        # create card(s) accordingly
+        p_card = PersonalPronoun_Card(pos=p)
+        p_card.save()
