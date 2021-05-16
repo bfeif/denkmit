@@ -4,6 +4,7 @@ from . import defaults
 import time, datetime
 
 class Card(models.Model):
+    is_suspended = models.BooleanField(default=False)
     last_studied_utc = models.DateTimeField(auto_now_add=True)
     num_repetitions = models.IntegerField(default=0)
     ease = models.FloatField(default=defaults.EASE_INIT)
