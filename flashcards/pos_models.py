@@ -43,15 +43,15 @@ class Decliner(POS):
 
 
 class PersonalPronoun(Decliner):
-    nom_pronoun_de = models.CharField(max_length=10, default="temporary") # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, sie, Sie)
-    person = models.IntegerField() # 1st person, 2nd person, 3rd person
-    is_plural = models.BooleanField(default=False)
+    plural_order = models.CharField(max_length=10) # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, sie, Sie)
+    person_order = models.IntegerField() # 1st person, 2nd person, 3rd person
+    case = models.CharField(max_length=3)
 
     def __str__(self):
         return f"({self.nom_pronoun_de}, {self.case}): {self.word_de}"
     
     class Meta:
-        unique_together = ("nom_pronoun_de", "case", "person", "is_plural")
+        unique_together = ("plural_order", "person_order", "case")
 
 
 class Article(Decliner):
