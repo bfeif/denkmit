@@ -48,10 +48,11 @@ class PersonalPronoun(Decliner):
     case = models.CharField(max_length=3)
 
     def __str__(self):
-        return f"({self.nom_pronoun_de}, {self.case}): {self.word_de}"
+        return f"({self.word_en}, {self.case}): {self.word_de}"
     
     class Meta:
-        unique_together = ("plural_order", "person_order", "case")
+        # https://en.wikipedia.org/wiki/German_pronouns#Personal_pronouns
+        unique_together = ("plural_order", "person_order", "case", "word_en")
 
 
 class Article(Decliner):
