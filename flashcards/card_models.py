@@ -1,6 +1,6 @@
 from django.db import models
 from . import pos_models, revlog_models
-from .. import defaults
+from . import defaults
 import time, datetime
 
 class Card(models.Model):
