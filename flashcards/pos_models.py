@@ -1,4 +1,5 @@
 from django.db import models
+from . import card_models
 import time
 
 class POS(models.Model):
@@ -29,6 +30,13 @@ class Noun(POS):
     word_en_pl = models.CharField(max_length=20, default="temporary")
     pluralization_model = models.CharField(max_length=20) # TODO change to Integer choice
     gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
+    
+    @classmethod
+    def create(cls, **kwargs):
+        noun = cls.objects.create(**kwargs)
+        print(noun)
+        card_models.NounGenderGuess_Card.objects.create(pos=noun)
+        card_models.NounPluralizationGuess_Card.objects.create(pos=noun)
 
     def __str__(self):
         gender_dic = {"M": "der", "F": "die", "N": "das", "P": "die"}
