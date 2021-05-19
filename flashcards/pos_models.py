@@ -54,6 +54,11 @@ class PersonalPronoun(Decliner):
     person_order = models.IntegerField() # 1st person, 2nd person, 3rd person
     case = models.CharField(max_length=3)
 
+    @classmethod
+    def create(cls, **kwargs):
+        personal_pronoun = cls.objects.create(**kwargs)
+        card_models.PersonalPronoun_Card.objects.create(pos=personal_pronoun)
+
     def __str__(self):
         return f"({self.word_en}, {self.case}): {self.word_de}"
     

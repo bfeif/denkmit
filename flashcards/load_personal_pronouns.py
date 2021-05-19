@@ -32,16 +32,10 @@ for i in range(len(de_df)):
     for case in ["Nom", "Dat", "Akk"]:
         
         # create and save POS
-        p = PersonalPronoun(
+        p = PersonalPronoun.create(
             word_de=de_df.loc[i][case],
             word_en=en_df.loc[i][case],
             plural_order=de_df.loc[i]["plural_order"],
             person_order=de_df.loc[i]["person_order"],
             case=case
         )
-        print(p)
-        p.save()
-
-        # create card(s) accordingly
-        p_card = PersonalPronoun_Card(pos=p)
-        p_card.save()
