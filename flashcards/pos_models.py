@@ -70,6 +70,11 @@ class Article(Decliner):
     gender = models.CharField(max_length=1) # TODO change to Integer choice: M, F, N
     definite = models.BooleanField() # definite or indefinite
 
+    @classmethod
+    def create(cls, **kwargs):
+        article = cls.objects.create(**kwargs)
+        card_models.Article_Card.objects.create(pos=article)
+
     def __str__(self):
         return f"({self.gender}, {self.case}, {self.definite}): {self.word_de}"
 

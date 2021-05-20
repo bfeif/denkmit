@@ -132,3 +132,12 @@ class PersonalPronoun_Card(Card):
 
     def flashcard_answer_str(self):
         return f"{self.pos.plural_order}, {self.pos.person_order}, {self.pos.case} (\"{self.pos.word_en}\"): {self.pos.word_de}"
+
+class Article_Card(Card):
+    pos = models.OneToOneField(pos_models.Article, on_delete=models.SET_NULL, null=True)
+
+    def flashcard_question_str(self):
+        return f"{self.pos.gender}, {self.pos.case}, {self.pos.definite} (\"{self.pos.word_en}\"): ___"
+
+    def flashcard_answer_str(self):
+        return f"{self.pos.gender}, {self.pos.case}, {self.pos.definite} (\"{self.pos.word_en}\"): {self.pos.word_de}"
