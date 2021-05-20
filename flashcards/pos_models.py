@@ -31,6 +31,9 @@ class Noun(POS):
     pluralization_model = models.CharField(max_length=20) # TODO change to Integer choice
     gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
 
+    class Meta:
+        unique_together = ("word_en", "word_de")
+    
     @classmethod
     def create(cls, **kwargs):
         noun = cls.objects.create(**kwargs)
