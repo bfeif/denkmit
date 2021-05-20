@@ -52,7 +52,6 @@ class Decliner(POS):
 class PersonalPronoun(Decliner):
     plural_order = models.CharField(max_length=10) # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, sie, Sie)
     person_order = models.IntegerField() # 1st person, 2nd person, 3rd person
-    case = models.CharField(max_length=3)
 
     @classmethod
     def create(cls, **kwargs):
