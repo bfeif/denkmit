@@ -36,3 +36,10 @@ class PersonalPronoun_RevLog(RevLog):
         on_delete=models.SET_NULL,
         null=True,
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+class Article_RevLog(RevLog):
+    card = models.ForeignKey(
+        card_models.Article_Card,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
