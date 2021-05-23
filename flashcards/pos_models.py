@@ -37,6 +37,8 @@ class Noun(POS):
     @classmethod
     def create(cls, **kwargs):
         noun = cls.objects.create(**kwargs)
+        card_models.NounDeEnMeaning_Card.objects.create(pos=noun)
+        card_models.NounEnDeMeaning_Card.objects.create(pos=noun)
         card_models.NounGenderGuess_Card.objects.create(pos=noun)
         card_models.NounPluralizationGuess_Card.objects.create(pos=noun)
 
