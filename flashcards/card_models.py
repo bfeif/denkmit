@@ -101,6 +101,38 @@ class Card(models.Model):
         self.update_card_srs_metrics(rating)
 
 
+class EnDeMeaning_Card(Card):
+
+    class Meta:
+        abstract = True
+
+    def flashcard_question_str(self):
+        return f"{self.pos.word_en}: _____"
+
+    def flashcard_answer_str(self):
+        return f"{self.pos.word_en}: {self.pos_word_de}"
+
+
+class DeEnMeaning_Card(Card):
+
+    class Meta:
+        abstract = True
+
+    def flashcard_question_str(self):
+        return f"{self.pos.word_de}: _____"
+
+    def flashcard_answer_str(self):
+        return f"{self.pos.word_de}: {self.pos_word_en}"
+
+
+class NounEnDeMeaning_Card(EnDeMeaning_Card):
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+
+
+class NounDeEnMeaning_Card(DeEnMeaning_Card):
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+
+
 class NounGenderGuess_Card(Card):
     pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
 
