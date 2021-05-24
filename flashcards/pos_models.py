@@ -3,8 +3,8 @@ from . import card_models
 import time
 
 class POS(models.Model):
-    word_de = models.CharField(max_length=20)
-    word_en = models.CharField(max_length=20)
+    word_de = models.CharField(max_length=40)
+    word_en = models.CharField(max_length=40)
     
     class Meta:
         abstract=True
