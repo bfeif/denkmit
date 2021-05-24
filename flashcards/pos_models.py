@@ -3,8 +3,8 @@ from . import card_models
 import time
 
 class POS(models.Model):
-    word_de = models.CharField(max_length=40)
-    word_en = models.CharField(max_length=40)
+    word_de = models.CharField(max_length=110)
+    word_en = models.CharField(max_length=110)
     
     class Meta:
         abstract=True
@@ -26,8 +26,8 @@ class Verb(POS):
 
 
 class Noun(POS):
-    word_de_pl = models.CharField(max_length=40)
-    word_en_pl = models.CharField(max_length=40, default="temporary")
+    word_de_pl = models.CharField(max_length=110)
+    word_en_pl = models.CharField(max_length=110, default="temporary")
     gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
 
     class Meta:

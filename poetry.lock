@@ -1,4 +1,18 @@
 [[package]]
+name = "ankipandas"
+version = "0.3.10"
+description = "Load your anki database as a pandas DataFrame with just one line of code!"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+colorlog = "*"
+numpy = "*"
+pandas = "*"
+randomfiletree = "*"
+
+[[package]]
 name = "appnope"
 version = "0.1.2"
 description = "Disable App Nap on macOS >= 10.9"
@@ -82,6 +96,17 @@ description = "Cross-platform colored terminal text."
 category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+
+[[package]]
+name = "colorlog"
+version = "5.0.1"
+description = "Add colours to the output of Python's logging module."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+colorama = {version = "*", markers = "sys_platform == \"win32\""}
 
 [[package]]
 name = "cymem"
@@ -392,6 +417,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "randomfiletree"
+version = "1.2.0"
+description = "Create a random file/directory tree/structure in python fortesting purposes."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "requests"
 version = "2.25.1"
 description = "Python HTTP for Humans."
@@ -641,9 +674,13 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7.1,<4.0"
-content-hash = "5fb0256830688e820d5bdd2bef56b123009591c86a7ba0c257885a34f4e02acd"
+content-hash = "9a37ff9f20d12d5d4ff0800e2eeaba17e4bf14163df6014e4858d2f9de68f6e5"
 
 [metadata.files]
+ankipandas = [
+    {file = "ankipandas-0.3.10-py3-none-any.whl", hash = "sha256:ee9082c6c3074b20d0638905ddedc12a93aab9832e3b2e734a0d7e66021ad2ec"},
+    {file = "ankipandas-0.3.10.tar.gz", hash = "sha256:af95a33a163f85ab33ff48ef75a7b2d24559bb9108df52fe9275edf062d80864"},
+]
 appnope = [
     {file = "appnope-0.1.2-py2.py3-none-any.whl", hash = "sha256:93aa393e9d6c54c5cd570ccadd8edad61ea0c4b9ea7a01409020c9aa019eb442"},
     {file = "appnope-0.1.2.tar.gz", hash = "sha256:dd83cd4b5b460958838f6eb3000c660b1f9caf2a5b1de4264e941512f603258a"},
@@ -690,6 +727,10 @@ click = [
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+colorlog = [
+    {file = "colorlog-5.0.1-py2.py3-none-any.whl", hash = "sha256:4e6be13d9169254e2ded6526a6a4a1abb8ac564f2fa65b310a98e4ca5bea2c04"},
+    {file = "colorlog-5.0.1.tar.gz", hash = "sha256:f17c013a06962b02f4449ee07cfdbe6b287df29efc2c9a1515b4a376f4e588ea"},
 ]
 cymem = [
     {file = "cymem-2.0.5-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:9d72d69f7a62a280199c3aa7bc550685c47d6d0689b2d299e6492253b86d2437"},
@@ -958,6 +999,10 @@ python-dateutil = [
 pytz = [
     {file = "pytz-2021.1-py2.py3-none-any.whl", hash = "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"},
     {file = "pytz-2021.1.tar.gz", hash = "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da"},
+]
+randomfiletree = [
+    {file = "RandomFileTree-1.2.0-py3-none-any.whl", hash = "sha256:5c22868879754231452c715b97829a6ddb1d5d59941ed05822f7a0285204c8fe"},
+    {file = "RandomFileTree-1.2.0.tar.gz", hash = "sha256:3a92e12ecbf093dc6b3fc1405c69030ed32db3a8a4a71f28724bd347f4c49afc"},
 ]
 requests = [
     {file = "requests-2.25.1-py2.py3-none-any.whl", hash = "sha256:c210084e36a42ae6b9219e00e48287def368a26d03a048ddad7bfee44f75871e"},
