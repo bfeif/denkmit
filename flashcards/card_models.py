@@ -110,7 +110,7 @@ class EnDeMeaning_Card(Card):
         return f"{self.pos.word_en}: _____"
 
     def flashcard_answer_str(self):
-        return f"{self.pos.word_en}: {self.pos_word_de}"
+        return f"{self.pos.word_en}: {self.pos.word_de}"
 
 
 class DeEnMeaning_Card(Card):

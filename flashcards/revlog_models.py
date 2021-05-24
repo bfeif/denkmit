@@ -30,6 +30,22 @@ class NounPluralizationGuess_RevLog(RevLog):
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
 
 
+class NounEnDeMeaning_RevLog(RevLog):
+    card = models.ForeignKey(
+        card_models.NounEnDeMeaning_Card,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+
+class NounDeEnMeaning_RevLog(RevLog):
+    card = models.ForeignKey(
+        card_models.NounDeEnMeaning_Card,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+
 class PersonalPronoun_RevLog(RevLog):
     card = models.ForeignKey(
         card_models.PersonalPronoun_Card,
