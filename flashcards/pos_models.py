@@ -26,8 +26,8 @@ class Verb(POS):
 
 
 class Noun(POS):
-    word_de_pl = models.CharField(max_length=20)
-    word_en_pl = models.CharField(max_length=20, default="temporary")
+    word_de_pl = models.CharField(max_length=40)
+    word_en_pl = models.CharField(max_length=40, default="temporary")
     gender = models.CharField(max_length=1) # # TODO change to Integer choice: M, F, N
 
     class Meta:
