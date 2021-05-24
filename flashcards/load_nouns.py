@@ -1,5 +1,4 @@
-from flashcards.models import Noun, NounGenderGuess_Card, \
-    NounPluralizationGuess_Card
+from flashcards.models import Noun
 
 word_de = ["Haus", "Strand", "Lösung"]
 word_en = ["house", "beach", "solution"]
