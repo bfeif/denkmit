@@ -126,15 +126,15 @@ class DeEnMeaning_Card(Card):
 
 
 class NounEnDeMeaning_Card(EnDeMeaning_Card):
-    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.CASCADE, null=True)
 
 
 class NounDeEnMeaning_Card(DeEnMeaning_Card):
-    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.CASCADE, null=True)
 
 
 class NounGenderGuess_Card(Card):
-    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.CASCADE, null=True)
 
     def flashcard_question_str(self):
         return f"___ {self.pos.word_de}"
@@ -145,7 +145,7 @@ class NounGenderGuess_Card(Card):
 
 
 class NounPluralizationGuess_Card(Card):
-    pos = models.OneToOneField(pos_models.Noun, on_delete=models.SET_NULL, null=True)
+    pos = models.OneToOneField(pos_models.Noun, on_delete=models.CASCADE, null=True)
 
     def flashcard_question_str(self):
         article = pos_models.Article.objects.get(gender=self.pos.gender, case="Nom", definite=True).word_de
@@ -157,7 +157,7 @@ class NounPluralizationGuess_Card(Card):
 
 
 class PersonalPronoun_Card(Card):
-    pos = models.OneToOneField(pos_models.PersonalPronoun, on_delete=models.SET_NULL, null=True)
+    pos = models.OneToOneField(pos_models.PersonalPronoun, on_delete=models.CASCADE, null=True)
 
     def flashcard_question_str(self):
         return f"{self.pos.plural_order}, {self.pos.person_order}, {self.pos.case} (\"{self.pos.word_en}\"): ___"
@@ -166,7 +166,7 @@ class PersonalPronoun_Card(Card):
         return f"{self.pos.plural_order}, {self.pos.person_order}, {self.pos.case} (\"{self.pos.word_en}\"): {self.pos.word_de}"
 
 class Article_Card(Card):
-    pos = models.OneToOneField(pos_models.Article, on_delete=models.SET_NULL, null=True)
+    pos = models.OneToOneField(pos_models.Article, on_delete=models.CASCADE, null=True)
 
     def flashcard_question_str(self):
         return f"{self.pos.gender}, {self.pos.case}, {self.pos.definite} (\"{self.pos.word_en}\"): ___"
