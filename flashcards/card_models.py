@@ -107,10 +107,10 @@ class EnDeMeaning_Card(Card):
         abstract = True
 
     def flashcard_question_str(self):
-        return f"{self.pos.word_en}: _____"
+        return f"{self.pos_word_en}: _____"
 
     def flashcard_answer_str(self):
-        return f"{self.pos.word_en}: {self.pos.word_de}"
+        return f"{self.pos_word_en}: {str(self.pos)}"
 
 
 class DeEnMeaning_Card(Card):
@@ -119,10 +119,10 @@ class DeEnMeaning_Card(Card):
         abstract = True
 
     def flashcard_question_str(self):
-        return f"{self.pos.word_de}: _____"
+        return f"{str(self.pos)}: _____"
 
     def flashcard_answer_str(self):
-        return f"{self.pos.word_de}: {self.pos_word_en}"
+        return f"{str(self.pos)}: {self.pos_word_en}"
 
 
 class NounEnDeMeaning_Card(EnDeMeaning_Card):
