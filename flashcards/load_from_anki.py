@@ -35,8 +35,6 @@ nouns['word_de_pl'] = nouns.nflds.str[0].str.extract(r'\(die ([^;]*)\)')
 nouns['word_de_pl'][nouns['word_de_pl'].isnull()] = nouns[nouns['word_de_pl'].isnull()]['word_de'] + '*'
 nouns['gender'] = nouns.nflds.str[0].str.split().str[0].map({'der': 'M', 'die': 'F', 'das': 'N'})
 
-for o in Noun.objects.all():
-    o.delete()
 for ind, noun in nouns.iterrows():
     print(noun.word_de)
     Noun.create(
