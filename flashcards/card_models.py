@@ -1,11 +1,12 @@
 from django.db import models
+from django.db.models import F, Q
 from . import pos_models, revlog_models
 from . import defaults
 import time, datetime
 
 class Card(models.Model):
     is_suspended = models.BooleanField(default=False)
-    last_studied_utc = models.DateTimeField(auto_now_add=True)
+    last_studied_date = models.DateField(auto_now_add=True)
     num_repetitions = models.IntegerField(default=0)
     ease = models.FloatField(default=defaults.EASE_INIT)
     interval = models.FloatField(default=defaults.INTERVAL_INIT)
@@ -16,22 +17,50 @@ class Card(models.Model):
     def __str__(self):
         return (
             f"{self.pos}:\n" \
-            f" - last studied at: {self.last_studied_utc} \n" \
+            f" - last studied at: {self.last_studied_date} \n" \
             f" - num repetitions: {self.num_repetitions} \n" \
             f" - current ease: {self.ease} \n" \
             f" - current interval: {self.interval} \n"
         )
 
-    # function to generate a flashcard deck for the day of studying
+    # function to generate the deck for a day's study
+    @classmethod
+    def get_flashcard_deck(cls):
+
+        # get all cards for review
+        review_cards = \
+        (cls
+         .objects # get the objects
+         .filter(
+            # all cards that should be studied today
+            last_studied_date__lte=\
+            datetime.date.today() -
+            F('interval') * datetime.timedelta(days=1),
+
+            # making sure to exclude new cards
+            num_repetitions__gt=0))
+
+        # get new cards, if there's space in today's deck
+        num_new_card_space = defaults.MAX_CARDS_PER_DAY - review_cards.count()
+        if num_new_card_space > 0:
+            new_cards = \
+            (cls
+            .objects
+            .filter(num_repetitions__exact=0)
+            [:num_new_card_space])
+
+            # combine for the whole deck
+            return list(review_cards) + list(new_cards)
+
+        # else, return just the review cards
+        else:
+            return list(review_cards)
+
+    # function to run a flashcard deck for the day of studying
     @classmethod
     def run_flashcard_deck(cls):
-
-        # get the deck of cards for the study session
-        card_list = cls.objects.all() # TODO: change to be only the relevant flashcards, i.e. the ones that need to be practiced for the day.
-        deck_length=card_list.count()
-
-        # do a flashcard for each noun in the deck
-        for index, card in enumerate(card_list[0:2]):
+        deck = cls.get_flashcard_deck()
+        for index, card in enumerate(deck):
             print(f"running flashcard {index + 1}")
             card.run_flashcard()
             print("------------\n")
@@ -42,7 +71,7 @@ class Card(models.Model):
             "  - 1 (Easy)\n" \
             "  - 2 (Good)\n" \
             "  - 3 (Difficult)\n" \
-            "  - 4 (No idea; show it again this session)\n" \
+            "  - 4 (No idea; show it again this session)\n\n" \
             "Difficulty: ")
 
     def update_card_srs_metrics(self, rating):
@@ -70,17 +99,17 @@ class Card(models.Model):
         self.interval = interval_new
         self.save()
 
-
-    # function to generate and study a flashcard
+    # function to study a card, and update its srs stats
     def run_flashcard(self):
 
         # show the question
-        print(self.flashcard_question_str())
+        print(self.flashcard_question_str() + '  (...Hit ENTER to show the answer...)')
         flashcard_start_timestamp = time.time()
 
         # wait for the user to request showing the answer, then show it
-        input("Hit ENTER to show the answer...")
-        print(self.flashcard_question_str())
+        # input("Hit ENTER to show the answer...")
+        # print(self.flashcard_question_str())
+        input()
         print(self.flashcard_answer_str())
 
         # get the user's rating; escape the card if the rating isn't legal
@@ -107,10 +136,10 @@ class EnDeMeaning_Card(Card):
         abstract = True
 
     def flashcard_question_str(self):
-        return f"{self.pos_word_en}: _____"
+        return f"{self.pos.word_en}: _____"
 
     def flashcard_answer_str(self):
-        return f"{self.pos_word_en}: {str(self.pos)}"
+        return f"{self.pos.word_en}: {str(self.pos)}"
 
 
 class DeEnMeaning_Card(Card):
@@ -122,7 +151,7 @@ class DeEnMeaning_Card(Card):
         return f"{str(self.pos)}: _____"
 
     def flashcard_answer_str(self):
-        return f"{str(self.pos)}: {self.pos_word_en}"
+        return f"{str(self.pos)}: {self.pos.word_en}"
 
 
 class NounEnDeMeaning_Card(EnDeMeaning_Card):
@@ -164,6 +193,7 @@ class PersonalPronoun_Card(Card):
 
     def flashcard_answer_str(self):
         return f"{self.pos.plural_order}, {self.pos.person_order}, {self.pos.case} (\"{self.pos.word_en}\"): {self.pos.word_de}"
+
 
 class Article_Card(Card):
     pos = models.OneToOneField(pos_models.Article, on_delete=models.CASCADE, null=True)
