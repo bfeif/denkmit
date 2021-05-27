@@ -25,7 +25,7 @@ class Card(models.Model):
 
     # function to generate the deck for a day's study
     @classmethod
-    def get_flashcard_deck(cls):
+    def get_flashcard_deck(cls, deck_size):
 
         # get all cards for review
         review_cards = \
@@ -41,7 +41,7 @@ class Card(models.Model):
             num_repetitions__gt=0))
 
         # get new cards, if there's space in today's deck
-        num_new_card_space = defaults.MAX_CARDS_PER_DAY - review_cards.count()
+        num_new_card_space = deck_size - review_cards.count()
         if num_new_card_space > 0:
             new_cards = \
             (cls
@@ -58,12 +58,21 @@ class Card(models.Model):
 
     # function to run a flashcard deck for the day of studying
     @classmethod
-    def run_flashcard_deck(cls):
-        deck = cls.get_flashcard_deck()
-        for index, card in enumerate(deck):
-            print(f"running flashcard {index + 1}")
-            card.run_flashcard()
-            print("------------\n")
+    def run_flashcard_deck(cls, deck_size=defaults.MAX_CARDS_PER_DAY):
+
+        # get the flashcard deck
+        deck = cls.get_flashcard_deck(deck_size)
+
+        # run through the deck until each card no longer needs studying today
+        deck_finished = False
+        card_index = 1
+        while len(deck) > 0:
+            for card in deck:
+                print(f"running flashcard {card_index}")
+                card.study_and_update_flashcard()
+                print("------------\n")
+                card_index+=1
+            deck = [card for card in deck if card.interval<1]
 
     def rate_flashcard_string(self):
         return (
@@ -100,7 +109,7 @@ class Card(models.Model):
         self.save()
 
     # function to study a card, and update its srs stats
-    def run_flashcard(self):
+    def study_and_update_flashcard(self):
 
         # show the question
         print(self.flashcard_question_str() + '  (...Hit ENTER to show the answer...)')
