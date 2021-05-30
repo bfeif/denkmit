@@ -12,6 +12,7 @@ ipython = "^7.23.0"
 pandas = "^1.2.4"
 spacy = "^3.0.6"
 ankipandas = "^0.3.10"
+jupyter = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 

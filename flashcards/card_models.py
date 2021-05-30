@@ -108,6 +108,13 @@ class Card(models.Model):
         self.interval = interval_new
         self.save()
 
+    # create function to parse input
+    def get_and_parse_difficulty_input(self):
+        try:
+            return int(input())
+        except ValueError:
+            return None
+
     # function to study a card, and update its srs stats
     def study_and_update_flashcard(self):
 
@@ -123,11 +130,11 @@ class Card(models.Model):
 
         # get the user's rating; escape the card if the rating isn't legal
         print(self.rate_flashcard_string())
-        rating = int(input())
+        rating = self.get_and_parse_difficulty_input()
+        while rating not in defaults.POSSIBLE_RATINGS:
+            print('Illegal entry. Reenter \nDifficulty:')
+            rating = self.get_and_parse_difficulty_input()
         duration = time.time() - flashcard_start_timestamp
-        if rating not in defaults.POSSIBLE_RATINGS:
-            print("Invalid rating entered, not updating anything")
-            return rating
 
         # generate and save the rev_log
         self.revlogs.create(
