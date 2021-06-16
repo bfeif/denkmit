@@ -47,6 +47,7 @@ class Card(models.Model):
             (cls
             .objects
             .filter(num_repetitions__exact=0)
+            .order_by('?')
             [:num_new_card_space])
 
             # combine for the whole deck
@@ -219,3 +220,4 @@ class Article_Card(Card):
 
     def flashcard_answer_str(self):
         return f"{self.pos.gender}, {self.pos.case}, {self.pos.definite} (\"{self.pos.word_en}\"): {self.pos.word_de}"
+
