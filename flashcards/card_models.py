@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.db.models import F, Q
 from . import pos_models, revlog_models
@@ -73,6 +74,7 @@ class Card(models.Model):
                 card.study_and_update_flashcard()
                 print("------------\n")
                 card_index+=1
+                os.system('clear')
             deck = [card for card in deck if card.interval<1]
 
     def rate_flashcard_string(self):
@@ -109,7 +111,7 @@ class Card(models.Model):
         self.interval = interval_new
         self.save()
 
-    # create function to parse input
+    # function to parse input
     def get_and_parse_difficulty_input(self):
         try:
             return int(input())
