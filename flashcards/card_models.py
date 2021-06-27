@@ -1,5 +1,6 @@
 import os
 from django.db import models
+from django.db.models import F, Q
 from . import pos_models, revlog_models
 from . import defaults
 import time, datetime
