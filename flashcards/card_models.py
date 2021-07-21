@@ -64,6 +64,7 @@ class Card(models.Model):
 
         # get the flashcard deck
         deck = cls.get_flashcard_deck(deck_size)
+        print(f'{len(deck)} cards to study today.')
 
         # run through the deck until each card no longer needs studying today
         deck_finished = False
