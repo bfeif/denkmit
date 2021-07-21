@@ -46,14 +46,14 @@ class Noun(POS):
         return f"{gender_dic[self.gender]} {self.word_de} (die {self.word_de_pl})"
 
 
-class Decliner(POS):
+class Declinable(POS):
     case = models.CharField(max_length=3) # TODO change to Integer choice: Nom, Akk, Dat, Gen
 
     class Meta:
         abstract=True
 
 
-class PersonalPronoun(Decliner):
+class PersonalPronoun(Declinable):
     plural_order = models.CharField(max_length=10) # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, sie, Sie)
     person_order = models.IntegerField() # 1st person, 2nd person, 3rd person
 
@@ -70,7 +70,7 @@ class PersonalPronoun(Decliner):
         unique_together = ("plural_order", "person_order", "case", "word_en")
 
 
-class Article(Decliner):
+class Article(Declinable):
     gender = models.CharField(max_length=1) # TODO change to Integer choice: M, F, N
     definite = models.BooleanField() # definite or indefinite
 
@@ -84,3 +84,18 @@ class Article(Decliner):
 
     class Meta:
         unique_together = ("case", "gender", "definite")
+
+
+class Preposition(POS):
+    case = models.CharField(max_length=3)
+
+    @classmethod
+    def create(cls, **kwargs):
+        preposition = cls.objects.create(**kwargs)
+        card_models.PrepositionDeclination_Card.objects.create(pos=preposition)
+        
+    def __str__(self):
+        return f"{self.word_de}: {self.word_en} ({self.case})"
+
+    class Meta:
+        unique_together = ("word_de", "word_en")

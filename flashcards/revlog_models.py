@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 from . import card_models
 
 # RevLog models
@@ -53,9 +54,18 @@ class PersonalPronoun_RevLog(RevLog):
         null=True,
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
 
+
 class Article_RevLog(RevLog):
     card = models.ForeignKey(
         card_models.Article_Card,
         on_delete=models.CASCADE,
+        null=True,
+        related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+
+class PrepositionDeclination_RevLog(RevLog):
+    card = models.ForeignKey(
+        card_models.PrepositionDeclination_Card,
+        on_delete=CASCADE,
         null=True,
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)

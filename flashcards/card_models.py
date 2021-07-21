@@ -4,6 +4,7 @@ from django.db.models import F, Q
 from . import pos_models, revlog_models
 from . import defaults
 import time, datetime
+import random
 
 class Card(models.Model):
     is_suspended = models.BooleanField(default=False)
@@ -41,8 +42,8 @@ class Card(models.Model):
             # making sure to exclude new cards
             num_repetitions__gt=0))
 
-        # get new cards, if there's space in today's deck
-        num_new_card_space = deck_size - review_cards.count()
+        # get new cards, if there's space in today's deck, but not more than max
+        num_new_card_space = min(deck_size - review_cards.count(), defaults.MAX_NEW_CARDS_PER_DAY)
         if num_new_card_space > 0:
             new_cards = \
             (cls
@@ -224,3 +225,18 @@ class Article_Card(Card):
     def flashcard_answer_str(self):
         return f"{self.pos.gender}, {self.pos.case}, {self.pos.definite} (\"{self.pos.word_en}\"): {self.pos.word_de}"
 
+
+class PrepositionDeclination_Card(Card):
+    pos = models.OneToOneField(pos_models.Preposition, on_delete=models.CASCADE, null=True)
+
+    def flashcard_question_str(self):
+        # ephemerally set noun and article
+        setattr(self, 'noun', pos_models.Noun.objects.order_by('?').first())
+        setattr(self, 'article', pos_models.Article.objects.get(gender=self.noun.gender, case=self.pos.case, definite=True))
+
+        # return flashcard string
+        return f"{self.pos.word_de} ____ {self.noun.word_de} ({self.noun.gender})"
+
+    def flashcard_answer_str(self):
+        # noun and article have already been ephemerally set
+        return f"{self.pos.word_de} {self.article.word_de} {self.noun.word_de}"
