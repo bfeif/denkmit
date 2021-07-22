@@ -43,7 +43,7 @@ class Card(models.Model):
             num_repetitions__gt=0))
 
         # get new cards, if there's space in today's deck, but not more than max
-        num_new_card_space = min(deck_size - review_cards.count(), defaults.MAX_NEW_CARDS_PER_DAY)
+        num_new_card_space = min(deck_size - review_cards.count(), cls.get_num_new_cards_per_day())
         if num_new_card_space > 0:
             new_cards = \
             (cls
@@ -58,6 +58,11 @@ class Card(models.Model):
         # else, return just the review cards
         else:
             return list(review_cards)
+
+    # function to get max_new_cards_per_day
+    @classmethod
+    def get_num_new_cards_per_day(self):
+        return defaults.MAX_NEW_CARDS_PER_DAY
 
     # function to run a flashcard deck for the day of studying
     @classmethod
@@ -229,14 +234,21 @@ class Article_Card(Card):
 class PrepositionDeclination_Card(Card):
     pos = models.OneToOneField(pos_models.Preposition, on_delete=models.CASCADE, null=True)
 
+    # overwrite parent class to return not-default. this is bad, and this should be rather stored in config some way smh
+    @classmethod
+    def get_num_new_cards_per_day(self):
+        return 1
+
     def flashcard_question_str(self):
-        # ephemerally set noun and article
-        setattr(self, 'noun', pos_models.Noun.objects.order_by('?').first())
-        setattr(self, 'article', pos_models.Article.objects.get(gender=self.noun.gender, case=self.pos.case, definite=True))
+        # ephemerally set noun and article. take care to get only familiar nouns, as this exercise tests only knowing the case of the preposition.
+        familiar_noun = NounDeEnMeaning_Card.objects.filter(ease__gt=1.7).order_by('?').first().pos
+        corresponding_article = pos_models.Article.objects.get(gender=familiar_noun.gender, case=self.pos.case, definite=True)
+        setattr(self, 'noun', familiar_noun)
+        setattr(self, 'article', corresponding_article)
 
         # return flashcard string
-        return f"{self.pos.word_de} ____ {self.noun.word_de} ({self.noun.gender})"
+        return f"{self.pos.word_de} ____ {self.noun.word_de} ({self.noun.gender}, ___)"
 
     def flashcard_answer_str(self):
         # noun and article have already been ephemerally set
-        return f"{self.pos.word_de} {self.article.word_de} {self.noun.word_de}"
+        return f"{self.pos.word_de} {self.article.word_de} {self.noun.word_de} ({self.noun.gender}, {self.pos.case})"
