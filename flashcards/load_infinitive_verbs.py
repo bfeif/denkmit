@@ -1,0 +1,1 @@
+from flashcards.models import InfinitiveVerb
