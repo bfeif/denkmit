@@ -10,6 +10,13 @@ class POS(models.Model):
         abstract=True
 
 
+class InfinitiveVerb(POS):
+    word_de_perfekt = models.CharField(max_length=110)
+
+    def __str__(self):
+        return f"{self.word_de} ({self.word_de_perfekt})"
+
+
 class Verb(POS):
     infinitive_de = models.CharField(max_length=20, default="temporary")
     mood = models.CharField(max_length=10) # TODO change to Integer choice

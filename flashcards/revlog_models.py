@@ -69,3 +69,19 @@ class PrepositionDeclination_RevLog(RevLog):
         on_delete=CASCADE,
         null=True,
         related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+
+class InfinitiveVerbDeEnMeaning_RevLog(RevLog):
+    card = models.ForeignKey(
+        card_models.InfinitiveVerbDeEnMeaning_Card,
+        on_delete=CASCADE,
+        null=True,
+        related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)
+
+
+class InfinitiveVerbEnDeMeaning_RevLog(RevLog):
+    card = models.ForeignKey(
+        card_models.InfinitiveVerbEnDeMeaning_Card,
+        on_delete=CASCADE,
+        null=True,
+        related_name="revlogs") # TODO change to make on_delete plug in the foreign key's word (i.e. instead of id)

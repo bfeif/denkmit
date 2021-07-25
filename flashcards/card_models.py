@@ -252,3 +252,12 @@ class PrepositionDeclination_Card(Card):
     def flashcard_answer_str(self):
         # noun and article have already been ephemerally set
         return f"{self.pos.word_de} {self.article.word_de} {self.noun.word_de} ({self.noun.gender}, {self.pos.case})"
+
+
+class InfinitiveVerbEnDeMeaning_Card(EnDeMeaning_Card):
+    pos = models.OneToOneField(pos_models.InfinitiveVerb, on_delete=models.CASCADE, null=True)
+
+
+class InfinitiveVerbDeEnMeaning_Card(DeEnMeaning_Card):
+    pos = models.OneToOneField(pos_models.InfinitiveVerb, on_delete=models.CASCADE, null=True)
+
