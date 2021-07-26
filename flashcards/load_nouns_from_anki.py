@@ -1,14 +1,8 @@
-# set up django
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE','denkmit.settings')
-import django
-django.setup()
-
 # imports
 from ankipandas import Collection
 from flashcards.models import Noun
 
-# env
+# load collection
 collection = Collection("/Users/benfeifke/code/anarki/data/sunken_bliff/collection.anki2")
 notes = collection.notes
 cards = collection.cards
