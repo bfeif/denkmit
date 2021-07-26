@@ -13,6 +13,15 @@ class POS(models.Model):
 class InfinitiveVerb(POS):
     word_de_perfekt = models.CharField(max_length=110)
 
+    @classmethod
+    def create(cls, **kwargs):
+        infinitive_verb = cls.objects.create(**kwargs)
+        card_models.InfinitiveVerbDeEnMeaning_Card.objects.create(pos=infinitive_verb)
+        card_models.InfinitiveVerbEnDeMeaning_Card.objects.create(pos=infinitive_verb)
+    
+    class Meta:
+        unique_together = ("word_de", "word_en")
+
     def __str__(self):
         return f"{self.word_de} ({self.word_de_perfekt})"
 
