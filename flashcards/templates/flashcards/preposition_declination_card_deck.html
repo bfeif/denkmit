@@ -1,0 +1,7 @@
+<h1>Preposition Declination Cards</h1>
+<ul>
+{% for card in cards %}
+    <li>{{ card.pos.word_de }} ({{ card.pos.word_en }}): ease={{ card.ease }}</li>
+    <!-- <li>banana</li> -->
+{% endfor %}
+</ul>

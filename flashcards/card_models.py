@@ -100,9 +100,9 @@ class Card(models.Model):
         num_repetitions_new = self.num_repetitions + 1
         ease_new = defaults.EASE_MODIFIER_DIC[rating] * self.ease
         if rating == 1:
-            interval_new = 3.75 * ease_new * defaults.INTERVAL_MODIFIER * self.interval
+            interval_new = max(1, 3.75 * ease_new) * defaults.INTERVAL_MODIFIER * self.interval
         elif rating == 2:
-            interval_new = 2.5  * ease_new * defaults.INTERVAL_MODIFIER * self.interval
+            interval_new = max(1, 2.5  * ease_new) * defaults.INTERVAL_MODIFIER * self.interval
         elif rating == 3:
             interval_new = 1.25 * ease_new * defaults.INTERVAL_MODIFIER * self.interval
         elif rating == 4:

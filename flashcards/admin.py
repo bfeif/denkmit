@@ -18,6 +18,7 @@ mods = [
     Article_Card,
     InfinitiveVerbEnDeMeaning_Card,
     InfinitiveVerbDeEnMeaning_Card,
+    PrepositionDeclination_Card
 ]
 
 for mod in [mods]:
