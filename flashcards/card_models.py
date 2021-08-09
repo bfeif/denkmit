@@ -32,7 +32,7 @@ class Card(models.Model):
         # get all cards for review
         review_cards = \
         (cls
-         .objects # get the objects
+         .objects
          .filter(
             # all cards that should be studied today
             last_studied_date__lte=\
@@ -40,7 +40,8 @@ class Card(models.Model):
             F('interval') * datetime.timedelta(days=1),
 
             # making sure to exclude new cards
-            num_repetitions__gt=0))
+            num_repetitions__gt=0)
+        )
 
         # get new cards, if there's space in today's deck, but not more than max
         num_new_card_space = min(deck_size - review_cards.count(), cls.get_num_new_cards_per_day())
@@ -96,7 +97,7 @@ class Card(models.Model):
     def update_card_srs_metrics(self, rating):
 
         # compute all the new settings
-        last_studied_utc_new = datetime.datetime.now()
+        last_studied_date_new = datetime.date.today()
         num_repetitions_new = self.num_repetitions + 1
         ease_new = defaults.EASE_MODIFIER_DIC[rating] * self.ease
         if rating == 1:
@@ -112,7 +113,7 @@ class Card(models.Model):
             return
 
         # set all the new settings to the object
-        self.last_studied_utc = last_studied_utc_new
+        self.last_studied_date = last_studied_date_new
         self.num_repetitions = num_repetitions_new
         self.ease = ease_new
         self.interval = interval_new
