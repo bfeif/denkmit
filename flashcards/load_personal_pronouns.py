@@ -35,6 +35,7 @@ for i in range(len(de_df)):
         p = PersonalPronoun.create(
             word_de=de_df.loc[i][case],
             word_en=en_df.loc[i][case],
+            nominativ=de_df.loc[i]["Nom"],
             plural_order=de_df.loc[i]["plural_order"],
             person_order=de_df.loc[i]["person_order"],
             case=case

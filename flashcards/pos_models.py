@@ -71,6 +71,7 @@ class Declinable(POS):
 class PersonalPronoun(Declinable):
     plural_order = models.CharField(max_length=10) # TODO change to Integer choice (ich, du, er, sie, es, wir, ihr, sie, Sie)
     person_order = models.IntegerField() # 1st person, 2nd person, 3rd person
+    nominativ = models.CharField(max_length=10)
 
     @classmethod
     def create(cls, **kwargs):

@@ -216,10 +216,22 @@ class PersonalPronoun_Card(Card):
     pos = models.OneToOneField(pos_models.PersonalPronoun, on_delete=models.CASCADE, null=True)
 
     def flashcard_question_str(self):
-        return f"{self.pos.plural_order}, {self.pos.person_order}, {self.pos.case} (\"{self.pos.word_en}\"): ___"
+        # return f"{self.pos.plural_order}, {self.pos.person_order}, {self.pos.case} (\"{self.pos.word_en}\"): ___"
+        if self.pos.case=="Nom":
+            return f"{self.pos.word_en}: ____"
+        if self.pos.case=="Dat":
+            return f"Ich habe ____ ein Geschenk gegeben. ({self.pos.word_en})"
+        if self.pos.case=="Akk":
+            return f"Ich liebe ____. ({self.pos.word_en})"
+
 
     def flashcard_answer_str(self):
-        return f"{self.pos.plural_order}, {self.pos.person_order}, {self.pos.case} (\"{self.pos.word_en}\"): {self.pos.word_de}"
+        if self.pos.case=="Nom":
+            return f"{self.pos.word_en}: {self.pos.word_de}"
+        if self.pos.case=="Dat":
+            return f"Ich habe {self.pos.word_de} ein Geschenk gegeben. ({self.pos.word_en})"
+        if self.pos.case=="Akk":
+            return f"Ich liebe {self.pos.word_de}. ({self.pos.word_en})"
 
 
 class Article_Card(Card):
@@ -261,4 +273,5 @@ class InfinitiveVerbEnDeMeaning_Card(EnDeMeaning_Card):
 
 class InfinitiveVerbDeEnMeaning_Card(DeEnMeaning_Card):
     pos = models.OneToOneField(pos_models.InfinitiveVerb, on_delete=models.CASCADE, null=True)
+
 
