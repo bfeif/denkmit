@@ -1,0 +1,28 @@
+word_de,word_en,case,plural_order,person_order,nominativ
+ich,I,Nom,singular,1,ich
+mir,me,Dat,singular,1,ich
+mich,me,Akk,singular,1,ich
+du,you,Nom,singular,2,du
+dir,you,Dat,singular,2,du
+dich,you,Akk,singular,2,du
+Sie,you (formal),Nom,formal,2,Sie
+Ihnen,you (formal),Dat,formal,2,Sie
+Sie,you (formal),Akk,formal,2,Sie
+er,he,Nom,singular,3,er
+ihm,him,Dat,singular,3,er
+ihn,him,Akk,singular,3,er
+sie,she,Nom,singular,3,sie
+ihr,her,Dat,singular,3,sie
+sie,her,Akk,singular,3,sie
+es,it,Nom,singular,3,es
+ihm,it,Dat,singular,3,es
+es,it,Akk,singular,3,es
+wir,we,Nom,plural,1,wir
+uns,us,Dat,plural,1,wir
+uns,us,Akk,plural,1,wir
+ihr,you (pl),Nom,plural,2,ihr
+euch,you (pl),Dat,plural,2,ihr
+euch,you (pl),Akk,plural,2,ihr
+sie,they,Nom,plural,3,sie
+ihnen,them,Dat,plural,3,sie
+sie,them,Akk,plural,3,sie

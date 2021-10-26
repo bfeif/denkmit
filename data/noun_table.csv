@@ -1,0 +1,180 @@
+word_de,word_en,word_de_pl,word_en_pl,gender
+Auge,eye,Augen,temporary,N
+Beispiel,example,Beispiele,temporary,N
+Bett,bed,Betten,temporary,N
+Bild,"photo, image",Bilder,temporary,N
+Brot,bread,Brote,temporary,N
+Buch,book,Bücher,temporary,N
+Büro,office,Büros,temporary,N
+Dorf,village,Dörfer,temporary,N
+Ende,end,Enden,temporary,N
+Frühstuck,breakfast,Frühstucke,temporary,N
+Gebäude,building,Gebäude,temporary,N
+Gehalt,salary,Gehälter,temporary,N
+Geschenk,gift,Geschenke,temporary,N
+Gesetz,the law,Gesetze,temporary,N
+Gespenst,ghost,Gespenster,temporary,N
+Haar,hair,Haare,temporary,N
+Handtuch,towel,Handtücher,temporary,N
+Händler,"dealer, distributor",Händler,temporary,N
+Klavier,piano,Klaviere,temporary,N
+Lenkrad,steering wheel,Lenkräder,temporary,N
+Paar,pair,Paare,temporary,N
+Schiff,ship (boat),Schiffe,temporary,N
+Schild,sign,Schilder,temporary,N
+Sinnbild,symbol,Sinnbilder,temporary,N
+Territorium,territory,Territorien,temporary,N
+Thema,topic,Themen,temporary,N
+Tier,animal,Tiere,temporary,N
+Ungeheuer,monster,Ungeheuer,temporary,N
+Unternehmen,company,Unternehmen,temporary,N
+Verb,verb,Verben,temporary,N
+Wort,word,Wörter,temporary,N
+Zelt,tent,Zelte,temporary,N
+Alptraum,nightmare,Alpträume,temporary,M
+Anführer,the leader,Anführer,temporary,M
+Anruf,call,Anrufe,temporary,M
+Austauschstudent,exchange student,Austauschstudenten,temporary,M
+Bart,beard,Bärte,temporary,M
+Bauer,the farmer,Bauern,temporary,M
+Berg,mountain,Berge,temporary,M
+Detektiv,detective,Detektive,temporary,M
+Dorfbewohner,the villager,Dorfbewohner,temporary,M
+Elektriker,electrician,Elektriker,temporary,M
+Fall,case (condition),Fälle,temporary,M
+Fehler,"mistake, error; software bugs",Fehler,temporary,M
+Flughafen,airport,Flughäfen,temporary,M
+Flur,hallway,Flure,temporary,M
+Fluss,the river,Flüsse,temporary,M
+Freund,friend,Freunden,temporary,M
+Gegenstand,object; subject matter,Gegenstände,temporary,M
+Geldschein,bill,Geldscheine,temporary,M
+Hafen,"port, harbor",Häfen,temporary,M
+Hügel,the hill,Hügel,temporary,M
+Kellner,waiter,Kellner,temporary,M
+Klang,the sound,Klänge,temporary,M
+Krieger,the warrior,Krieger,temporary,M
+Kundschafter,scout,Kundschafter,temporary,M
+König,king,Könige,temporary,M
+Moment,moment,Momente,temporary,M
+Name,the name,Namen,temporary,M
+Ort,place,Orte,temporary,M
+Pirat,pirate,Piraten,temporary,M
+Platz,place,Plätze,temporary,M
+Schatten,shadow,Schatten,temporary,M
+Schrank,the cupboard/cabinet,Schränke,temporary,M
+See,lake,Seen,temporary,M
+Stoff,the cloth,Stoffe,temporary,M
+Strand,beach,Strände,temporary,M
+Sturm,the storm,Stürme,temporary,M
+Topf,pot (cooking),Topfen,temporary,M
+Torheit,folly,Torheiten,temporary,M
+Unterschied,difference,Unterschiede,temporary,M
+Vorort,suburb,Vororte,temporary,M
+Vorrat,the supply,Vorräte,temporary,M
+Weg,"way, path, route, trail",Wege,temporary,M
+Badezimmer,bathroom,Badezimmer,temporary,N
+Horizont,the horizon,Horizonte,temporary,M
+Schicksal,fate,Schicksale,temporary,N
+Fremde,stranger,Fremde,temporary,F
+Teil,part,Teilen,temporary,N
+Mappe,folder,Mappen,folders,F
+Koch,chef,Köche,temporary,M
+Dummkopf,fool,Dummköpfe,temporary,M
+Bau,the construction,Baue,temporary,M
+Boden,ground,Böden,temporary,M
+Arbeit,work,Arbeiten,temporary,F
+Zeug,stuff,Zeuge,temporary,N
+Gegenteil,the opposite,Gegenteile,temporary,N
+Kleber,the glue,Kleber,temporary,M
+Wetter,weather,Wetter,temporary,N
+Akku,cellphone battery,Akkus,temporary,M
+Mittagessen,lunch,Mittagessen,temporary,N
+Ladegerät,charger,Ladegeräte,temporary,N
+Handy,mobile phone,Handys,temporary,N
+Geld,money,Gelder,temporary,N
+Gewissen,conscience,Gewissen,temporary,N
+Fleisch,the meat,Fleische,temporary,N
+Alter,age,Alter,temporary,N
+Kontrolle,control,Kontrollen,controls,F
+Stamm,stem,Stämme,temporary,M
+Schrott,"junk, rubbish",Schrotte,temporary,M
+Müll,garbage,-,-,M
+Muskelkater,sore muscles,Muskelkater,temporary,M
+Abendessen,supper,Abendessen,temporary,N
+Ufer,"shore, bank",Ufer,"shores, banks",N
+Meinung,opinion,Meinungen,temporary,F
+Schwanz,tail,Schwänze,tails,M
+Gleichgewicht,"balance (as in ""hold your arms out to keep balance"")",Gleichgewicht,balance,N
+Bildschirm,screen,Bildschirme,screens,M
+Häuptling,the chief,Häuptlinge,temporary,M
+Kaffee,coffee,Kaffees,temporary,M
+Teller,plate,Teller,plates,M
+Webseite,website,Webseiten,temporary,F
+Telefonzelle,phone booth,Telefonzellen,temporary,F
+Kunde,customer,Kunden,customers,M
+Dreck,mess,Drecke,messes,M
+Mut,courage,-,-,M
+Übernachtung,"overnight (as in ""overnight stay"")",Übernachtungen,temporary,F
+Wäsche,the washing,Wäschen,temporary,F
+Sicherheitskontrolle,security check,Sicherheitskontrollen,temporary,F
+Ruhe,the rest/calm/quiet,-,-,F
+Kopfhörer,headphones,Kopfhörer,temporary,M
+Kleidung,clothes,Kleidungen,temporary,F
+Getreide,the crops,Getreide,temporary,F
+Wettbewerb,the competition/contest,Wettbewerbe,temporary,M
+Zweifel,the doubt,Zweifel,temporary,M
+Ahnung,"clue, idea, inkling",Ahnung,temporary,F
+Aktivität,activity,Aktivitäten,temporary,F
+Antwort,answer,Antworten,temporary,F
+Bewegung,movement,Bewegungen,temporary,F
+Bombe,the bomb,Bomben,temporary,F
+Decke,blanket,Decken,temporary,F
+Ecke,corner,Ecken,temporary,F
+Einstellung,setting(s),Einstellungen,temporary,F
+Erkundung,the exploration,Erkundungen,temporary,F
+Etage,floor (i.e. builiding-level),Etagen,temporary,F
+Fahrt,"trip, drive",Fahrten,temporary,F
+Familie,family,Familien,temporary,F
+Fertigkeit,"the skill or ability (to do something, e.g. play chess)",Fertigkeiten,temporary,F
+Firma,company,Firmen,temporary,F
+Frage,question,Fragen,temporary,F
+Geige,violin,Geigen,temporary,F
+Geschäftsfrau,businesswoman,Geschäftsfrauen,temporary,F
+Grenze,border,Grenzen,temporary,F
+Hintertür,back door,Hintertüren,temporary,F
+Hütte,the hut,Hütten,temporary,F
+Idee,idea,Ideen,temporary,F
+Jagd,the hunt,Jagden,temporary,F
+Katze,cat,Katzen,temporary,F
+Kellnerin,waitress,Kellnerinnen,temporary,F
+Kiste,box,Kisten,temporary,F
+Kraft,"strength/power (like, ability)",Kräfte,temporary,F
+Krankheit,the disease,Krankheiten,temporary,F
+Küche,kitchen,Küchen,temporary,F
+Lösung,solution,Lösungen,temporary,F
+Mannschaft,the crew/team,Mannschaften,temporary,F
+Person,person,Personen,temporary,F
+Pflanze,the plant,Pflanzen,temporary,F
+Pommes,french fries,Pommes*,temporary,F
+Präposition,preposition,Präpositionen,temporary,F
+Regel,the rule,Regeln,temporary,F
+Reise,voyage,Reisen,temporary,F
+Richtung,direction,Richtungen,temporary,F
+Routine,routine,Routinen,temporary,F
+Seite,side,Seiten,temporary,F
+Sorge,"care, concern, worry",Sorgen,temporary,F
+Statue,the statue,Statuen,temporary,F
+Stimmung,"mood, sentiment, morale",Stimmungen,temporary,F
+Versammlung,"the meeting, assembly, conference",Versammlungen,temporary,F
+Vorbereitung,the preparation,Vorbereitungen,temporary,F
+Waffe,weapon,Waffen,temporary,F
+Woche,week,Wochen,temporary,F
+Zahl,number,Zahlen,temporary,F
+Zeichnung,the illustration,Zeichnungen,temporary,F
+Zutate,ingredient,Zutaten,temporary,F
+Überraschung,surprise,Überraschungen,temporary,F
+Geschäftsleute,business people,Geschäftsleute,temporary,P
+Erschöpfung,the exhaustion,Erschöpfungen,temporary,F
+Erlaubnis,permission,Erlaubnisse,temporary,F
+Dorfangelegenheiten,the village matters,Dorfangelegenheiten,temporary,F
