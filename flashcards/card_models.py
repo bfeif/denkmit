@@ -1,6 +1,7 @@
 import os
 from django.db import models
-from django.db.models import F, Q
+from django.db.models import F, Q, ExpressionWrapper
+from django.db.models.fields import DateField
 from . import pos_models, revlog_models
 from . import defaults
 import time, datetime
@@ -36,8 +37,7 @@ class Card(models.Model):
          .filter(
             # all cards that should be studied today
             last_studied_date__lte=\
-            datetime.date.today() -
-            F('interval') * datetime.timedelta(days=1),
+            datetime.date.today() - datetime.timedelta(days=1),
 
             # making sure to exclude new cards
             num_repetitions__gt=0)
