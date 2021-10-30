@@ -2,6 +2,7 @@ import os
 from django.db import models
 from django.db.models import F, Q, ExpressionWrapper
 from django.db.models.fields import DateField
+from django.db.models.query import QuerySet
 from . import pos_models, revlog_models
 from . import defaults
 import time, datetime
@@ -67,7 +68,7 @@ class Card(models.Model):
 
     # function to run a flashcard deck for the day of studying
     @classmethod
-    def run_flashcard_deck(cls, deck_size=defaults.MAX_CARDS_PER_DAY):
+    def learn_today_flashcard_deck(cls, deck_size=defaults.MAX_CARDS_PER_DAY):
 
         # get the flashcard deck
         deck = cls.get_flashcard_deck(deck_size)
@@ -253,9 +254,14 @@ class PrepositionDeclination_Card(Card):
         return 1
 
     def flashcard_question_str(self):
-        # ephemerally set noun and article. take care to get only familiar nouns, as this exercise tests only knowing the case of the preposition.
-        familiar_noun = NounDeEnMeaning_Card.objects.filter(ease__gt=1.7).order_by('?').first().pos
+        # Get a familiar noun. This exercise is to study only preposition declesnion--the noun should aid, not hinder.
+        if NounDeEnMeaning_Card.objects.filter(ease__gt=1.7).count() > 0:
+            familiar_noun = NounDeEnMeaning_Card.objects.filter(ease__gt=1.7).order_by('?').first().pos
+        else:
+            familiar_noun = NounDeEnMeaning_Card.objects.order_by('-ease')[0:5][random.randint(0, 4)].pos
         corresponding_article = pos_models.Article.objects.get(gender=familiar_noun.gender, case=self.pos.case, definite=True)
+
+        # ephemerally set noun and article, so that the same noun can be used for each repetition of the card.
         setattr(self, 'noun', familiar_noun)
         setattr(self, 'article', corresponding_article)
 
