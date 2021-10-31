@@ -2,9 +2,9 @@ word_de,word_en,case,plural_order,person_order,nominativ
 ich,I,Nom,singular,1,ich
 mir,me,Dat,singular,1,ich
 mich,me,Akk,singular,1,ich
-du,you,Nom,singular,2,du
-dir,you,Dat,singular,2,du
-dich,you,Akk,singular,2,du
+du,you (informal),Nom,singular,2,du
+dir,you (informal),Dat,singular,2,du
+dich,you (informal),Akk,singular,2,du
 Sie,you (formal),Nom,formal,2,Sie
 Ihnen,you (formal),Dat,formal,2,Sie
 Sie,you (formal),Akk,formal,2,Sie
