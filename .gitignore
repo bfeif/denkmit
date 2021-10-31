@@ -1,6 +1,6 @@
 # projectj-specific files
 flashcards/create_word_csvs.py
-data/datadump*
+data/*/datadump*
 data/backups
 
 # Byte-compiled / optimized / DLL files
