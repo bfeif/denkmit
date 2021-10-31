@@ -1,3 +1,4 @@
+poetry install
 poetry run python manage.py migrate --run-syncdb
 poetry run python << END
 import os
