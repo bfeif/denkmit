@@ -13,7 +13,8 @@ With 5 minutes a day of practicing preposition declensions with Denkmit, you can
 ## Setup
 So, you want to Denkmit? At the moment, Denkmit only supports a terminal UI for learning German flashcards. Let's get the project set up:
 1. This project uses poetry for environment management, so install that first (instructions [here](https://python-poetry.org/docs/#osx--linux--bashonwindows-install-instructions)).
-2. Initialize the project by running `./initialize_denkmit.sh`.
+2. Clone this repository, and `cd` into it.
+3. Initialize the project by running `./initialize_denkmit.sh`.
 
 Great, the project is set up! Head to the next section to see how to start learning.
 
